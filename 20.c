@@ -37,15 +37,24 @@ isValid(char* s)
         switch (s[i]) {
             case ')':
                 stackPop(st, &opener);
-                if (opener != '(') return false;
+                if (opener != '(') {
+                    free(st);
+                    return false;
+                }
                 break;
             case ']':
                 stackPop(st, &opener);
-                if (opener != '[') return false;
+                if (opener != '[') {
+                    free(st);
+                    return false;
+                }
                 break;
             case '}':
                 stackPop(st, &opener);
-                if (opener != '{') return false;
+                if (opener != '{') {
+                    free(st);
+                    return false;
+                }
                 break;
             default:
                 stackPush(st, &s[i]);
