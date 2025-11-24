@@ -6,13 +6,6 @@ struct ListNode {
     struct ListNode *next;
 };
 
-/*
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     struct ListNode *next;
- * };
- */
 struct ListNode *
 mergeTwoLists(struct ListNode *list1, struct ListNode *list2)
 {
@@ -23,17 +16,7 @@ mergeTwoLists(struct ListNode *list1, struct ListNode *list2)
     struct ListNode *result, *head;
 
     for (result = NULL;;) {
-        if (result != NULL) {
-            if (list1->val <= list2->val) {
-                result->next = list1;
-                result = result->next;
-                list1 = list1->next;
-            } else {
-                result->next = list2;
-                result = result->next;
-                list2 = list2->next;
-            }
-        } else {
+        if (result == NULL) {
             if (list1->val <= list2->val) {
                 result = list1;
                 list1 = list1->next;
@@ -43,6 +26,16 @@ mergeTwoLists(struct ListNode *list1, struct ListNode *list2)
             }
 
             head = result;
+        } else {
+            if (list1->val <= list2->val) {
+                result->next = list1;
+                result = result->next;
+                list1 = list1->next;
+            } else {
+                result->next = list2;
+                result = result->next;
+                list2 = list2->next;
+            }
         }
 
         if (list1 == NULL) {
@@ -81,12 +74,14 @@ main(void)
 
     list2 = calloc(1, sizeof *list2);
     list2->val = 1;
-    list2->next = calloc(1, sizeof *list1);
+    list2->next = calloc(1, sizeof *list2);
     list2->next->val = 3;
-    list2->next->next = calloc(1, sizeof *list1);
+    list2->next->next = calloc(1, sizeof *list2);
     list2->next->next->val = 4;
 
-    struct ListNode *result = mergeTwoLists(list1, list2);
+    struct ListNode *result, *head;
+    result = mergeTwoLists(list1, list2);
+    head = result;
 
     while (result != NULL) {
         printf("(%d)", result->val);
@@ -99,6 +94,6 @@ main(void)
         }
     }
 
-    freeLinkedList(result);
+    freeLinkedList(head);
     return 0;
 }
