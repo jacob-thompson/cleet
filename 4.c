@@ -5,8 +5,8 @@ double
 findMedianSortedArrays(int *nums1, int nums1Size, int *nums2, int nums2Size)
 {
     int totalSize = nums1Size + nums2Size;
+    int totalSizeIsOdd = totalSize % 2 != 0;
     int merged[totalSize];
-    int oddSize = totalSize % 2 != 0;
 
     int i, i1, i2;
     for (i = i1 = i2 = 0; i < totalSize; ++i) {
@@ -14,10 +14,10 @@ findMedianSortedArrays(int *nums1, int nums1Size, int *nums2, int nums2Size)
         int curr2 = i2 >= nums2Size ? INT_MAX : *(nums2 + i2);
         merged[i] = curr1 <= curr2 ? *(nums1 + i1++) : *(nums2 + i2++);
 
-        if (oddSize && i == (int)((totalSize - 1) / 2))
+        if (totalSizeIsOdd && i == (int)((totalSize - 1) / 2))
             return merged[i];
 
-        if (!oddSize && i == (int)(totalSize / 2))
+        if (!totalSizeIsOdd && i == (int)(totalSize / 2))
             return (double)(merged[i - 1] + merged[i]) / 2;
     }
 
