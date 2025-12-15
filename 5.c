@@ -16,17 +16,15 @@ longestPalindrome(char *s)
     int longest = 1;
     int start = 0;
 
-    for (int i = 0; s[i] != 0; ++i) {
-        for (int j = 0; s[j] != 0; ++j) {
-            if (s[i] == s[j] && isPalindrome(s, i, j)) {
+    for (int i = 0; s[i] != 0; ++i)
+        for (int j = 0; s[j] != 0; ++j)
+            if (isPalindrome(s, i, j)) {
                 int len = j + 1 - i;
                 if (len > longest) {
                     longest = len;
                     start = i;
                 }
             }
-        }
-    }
 
     char *res = calloc(longest + 1, sizeof *res);
     if (!res) return NULL;
