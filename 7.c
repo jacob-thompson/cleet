@@ -21,23 +21,22 @@ reverse(int x)
     const int amountOfDigits = countDigits(x);
     if (amountOfDigits > MAX_DIGITS) return 0;
 
-    int care = amountOfDigits == MAX_DIGITS;
-
     const int neg = x < 0;
     const int *cmp = neg ? min : max;
 
-    int res, digit;
+    int care, res, digit;
+    care = amountOfDigits == MAX_DIGITS;
     res = 0;
 
     for (int i = 0; x != 0; x /= 10) {
         digit = x % 10;
 
         if (care) {
-            if (!neg && digit < cmp[i]) care = 0;
-            else if (neg && digit > cmp[i]) care = 0;
+            if ((!neg && digit < cmp[i]) || (neg && digit > cmp[i]))
+                care = 0;
 
-            if (!neg && digit > cmp[i]) return 0;
-            else if (neg && digit < cmp[i]) return 0;
+            if ((!neg && digit > cmp[i]) || (neg && digit < cmp[i]))
+                return 0;
 
             ++i;
         }
