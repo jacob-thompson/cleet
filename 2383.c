@@ -5,9 +5,8 @@ getInitialEnergyNecessary(int *energy, int energySize)
 {
     int necessary = 0;
 
-    for (int i = 0; i < energySize; ++i) {
+    for (int i = 0; i < energySize; ++i)
         necessary += *(energy + i);
-    }
 
     return necessary + 1;
 }
@@ -38,15 +37,14 @@ minNumberOfHours(
     int experienceSize
 )
 {
-    int enNecessary = getInitialEnergyNecessary(energy, energySize);
-    int xpNecessary = getInitialExperienceNecessary(experience, experienceSize);
+    const int enNecessary = getInitialEnergyNecessary(energy, energySize);
+    const int xpNecessary = getInitialExperienceNecessary(experience, experienceSize);
 
-    int needEnergy = initialEnergy < enNecessary;
-    int needExperience = initialExperience < xpNecessary;
+    const int needEnergy = initialEnergy < enNecessary;
+    const int needExperience = initialExperience < xpNecessary;
 
-    if (!needEnergy && !needExperience) {
-        return 0;
-    } else {
+    if (!needEnergy && !needExperience) return 0;
+    else {
         int hours = 0;
 
         hours += needEnergy ? enNecessary - initialEnergy : 0;

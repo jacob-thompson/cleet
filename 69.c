@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -5,8 +6,9 @@
 int *
 setOfPerfectSquares(int max)
 {
-    unsigned long long x = 1;
+    uint32_t x = 1;
     int *set = calloc(max, sizeof *set);
+    assert(set);
 
     for (int i = 0; x * x <= (unsigned)max; ++x) set[i++] = x * x;
 
@@ -19,8 +21,8 @@ mySqrt(int x)
     if (x == 0 || x == 1) return x;
 
     const int *squares = setOfPerfectSquares(x);
-
     int res;
+
     for (int i = 0; squares[i] != 0; ++i) res = i + 1;
 
     free((void *)squares);

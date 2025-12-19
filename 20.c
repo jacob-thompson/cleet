@@ -1,36 +1,35 @@
+#include <assert.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #define CONSTRAINT 10000
 
-struct stack {
+typedef struct {
     char s[CONSTRAINT];
     int top;
-};
+} Stack;
 
 void
-stackPush(struct stack *stack, const char *value)
+stackPush(Stack *st, const char *value)
 {
-    if (stack->top >= CONSTRAINT) return;
-    stack->s[stack->top] = *value;
-    ++stack->top;
+    if (st->top >= CONSTRAINT) return;
+    st->s[st->top++] = *value;
 }
 
 void
-stackPop(struct stack *stack, char *popped)
+stackPop(Stack *st, char *popped)
 {
     *popped = 0;
-    if (stack->top <= 0) return;
-    --stack->top;
-    *popped = stack->s[stack->top];
+    if (st->top <= 0) return;
+    *popped = st->s[--st->top];
 }
 
 bool
-isValid(char* s)
+isValid(char *s)
 {
-    struct stack *st;
-    st = calloc(1, sizeof *st);
+    Stack *st = calloc(1, sizeof *st);
+    assert(st);
 
     for(int i = 0; s[i] != '\0'; ++i) {
         char opener;
@@ -61,13 +60,11 @@ isValid(char* s)
         }
     }
 
-    if (st->top > 0) {
-        free(st);
-        return false;
-    }
+    int top = st->top;
 
     free(st);
-    return true;
+
+    return top > 0 ? false : true;
 }
 
 int

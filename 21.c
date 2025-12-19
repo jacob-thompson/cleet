@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -66,17 +67,23 @@ main(void)
     struct ListNode *list1, *list2;
 
     list1 = calloc(1, sizeof *list1);
+    assert(list1);
     list1->val = 1;
     list1->next = calloc(1, sizeof *list1);
+    assert(list1->next);
     list1->next->val = 2;
     list1->next->next = calloc(1, sizeof *list1);
+    assert(list1->next->next);
     list1->next->next->val = 4;
 
     list2 = calloc(1, sizeof *list2);
+    assert(list2);
     list2->val = 1;
     list2->next = calloc(1, sizeof *list2);
+    assert(list2->next);
     list2->next->val = 3;
     list2->next->next = calloc(1, sizeof *list2);
+    assert(list2->next->next);
     list2->next->next->val = 4;
 
     struct ListNode *result, *head;
@@ -95,5 +102,6 @@ main(void)
     }
 
     freeLinkedList(head);
+
     return 0;
 }

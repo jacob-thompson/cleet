@@ -9,7 +9,9 @@ climbStairs(int n)
 {
     if (n == 1 || n == 2) return n;
     if (memo[n]) return memo[n];
+
     memo[n] = climbStairs(n - 1) + climbStairs(n - 2);
+
     return memo[n];
 }
 
@@ -21,5 +23,6 @@ main(void)
     printf("n = 4 -> %d\n", climbStairs(4));
     printf("n = 5 -> %d\n", climbStairs(5));
     printf("n = 45 -> %d\n", climbStairs(45));
+
     return 0;
 }

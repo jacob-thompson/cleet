@@ -27,6 +27,7 @@ myAtoi(char *s)
     }
 
     if (inv) res = -res;
+
     if (res < INT32_MIN) res = INT32_MIN;
     else if (res > INT32_MAX) res = INT32_MAX;
 
@@ -41,5 +42,6 @@ main(void)
     printf("%d\n", myAtoi("1337c0d3"));
     printf("%d\n", myAtoi("0-1"));
     printf("%d\n", myAtoi("words and 987"));
+
     return 0;
 }

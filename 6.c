@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -54,7 +55,10 @@ convert(char *s, int numRows)
 
     /* read matrix */
     char *res = calloc(CONSTRAINT + 1, sizeof *res);
+    assert(res);
+
     index = 0; // for writing characters to resultant string
+
     for (int y = 0; y < numRows; ++y)
         for (int x = 0; x < numCols; ++x)
             if (matrix[x][y] != EOF) res[index++] = matrix[x][y];

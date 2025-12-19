@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -7,6 +8,7 @@ isPalindrome(char *s, int front, int back)
 {
     for (; front < back; ++front, --back)
         if (s[front] != s[back]) return 0;
+
     return 1;
 }
 
@@ -19,7 +21,7 @@ longestPalindrome(char *s)
     for (int i = 0; s[i] != 0; ++i)
         for (int j = 0; s[j] != 0; ++j)
             if (isPalindrome(s, i, j)) {
-                int len = j + 1 - i;
+                const int len = j + 1 - i;
                 if (len > longest) {
                     longest = len;
                     start = i;
@@ -27,7 +29,7 @@ longestPalindrome(char *s)
             }
 
     char *res = calloc(longest + 1, sizeof *res);
-    if (!res) return NULL;
+    assert(res);
 
     strncpy(res, s + start, longest);
     *(res + longest) = '\0';

@@ -1,29 +1,24 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 int
 countOperations(int num1, int num2)
 {
-    for (int ops = 0; ; ++ops) {
-        if (num1 == 0 || num2 == 0) return ops;
+    int ops;
 
-        if (num1 >= num2) {
-            num1 -= num2;
-        } else {
-            num2 -= num1;
-        }
-    }
+    for (ops = 0; num1 != 0 && num2 != 0 ; ++ops)
+        if (num1 >= num2) num1 -= num2;
+        else num2 -= num1;
+
+    return ops;
 }
 
 int
 main(void)
 {
-    int num1, num2, res;
-    num1 = 10;
-    num2 = 10;
-    res = countOperations(num1, num2);
+    int n = 10;
+    int res = countOperations(n, n);
 
-    printf("%d, %d -> %d\n", num1, num2, res);
+    printf("%d, %d -> %d\n", n, n, res);
 
     return 0;
 }

@@ -9,8 +9,11 @@ int
 countDigits(int n)
 {
     if (n == 0) return 1;
-    int count = 0;
-    for (; n != 0; n /= 10) ++count;
+
+    int count;
+
+    for (count = 0; n != 0; n /= 10) ++count;
+
     return count;
 }
 

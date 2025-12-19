@@ -5,9 +5,7 @@
 int
 lengthOfLongestSubstring(char *s)
 {
-    int longest, len;
-    longest = len = 0;
-
+    int longest = 0;
     int set[ASCII_VALUES] = {0};
 
     char *left, *right;
@@ -30,7 +28,7 @@ lengthOfLongestSubstring(char *s)
             continue;
         }
 
-        len = right - left + 1;
+        const int len = right - left + 1;
         if (len > longest) longest = len;
     }
 

@@ -1,28 +1,22 @@
+#include <assert.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-/*
- * Note: The returned array must be malloced, assume caller calls free().
- */
 bool *
 prefixesDivBy5(int* nums, int numsSize, int* returnSize)
 {
     bool *output = calloc(numsSize, sizeof *output);
+    assert(output);
 
-    unsigned long int current = 0;
-
+    unsigned int current = 0;
     for (int i = 0; i < numsSize; ++i) {
         current <<= 1;
-        if (nums[i] == 1)
-            ++current;
+        if (nums[i] == 1) ++current;
 
         current %= 5;
-        if (current == 0) {
-            *(output + i) = true;
-        } else {
-            *(output + i) = false;
-        }
+        if (current == 0) *(output + i) = true;
+        else *(output + i) = false;
     }
 
     *returnSize = numsSize;
@@ -49,5 +43,6 @@ main(void)
     printf("\b]\n");
 
     free(result);
+
     return 0;
 }
