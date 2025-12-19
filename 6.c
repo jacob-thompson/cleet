@@ -29,46 +29,36 @@ convert(char *s, int numRows)
     const int length = strnlen(s, CONSTRAINT + 1);
     const int numCols = getNumCols(s, numRows);
 
-    // write matrix
+    /* write matrix */
     int matrix[numCols][numRows];
     int index, zigZagFlag, significantRow;
     index = zigZagFlag = significantRow = 0;
     for (int x = 0; x < numCols; ++x)
         for (int y = 0; y < numRows; ++y) {
-            if (index >= length) {
+            if (index >= length) { // full string has already been written
                 matrix[x][y] = EOF;
                 continue;
             }
 
-            if (zigZagFlag && y == significantRow) {
+            if (zigZagFlag && y == significantRow) { // single-value column
                 matrix[x][y] = s[index++];
                 --significantRow;
-            }
-            else if (zigZagFlag && y != significantRow) matrix[x][y] = EOF;
-            else matrix[x][y] = s[index++];
+            } else if (zigZagFlag && y != significantRow) matrix[x][y] = EOF;
+            else matrix[x][y] = s[index++]; // full column
 
-            if (y == numRows - 1 && numRows > 1) {
+            if (y == numRows - 1 && numRows > 1) { // at bottom row of matrix
                 if (!zigZagFlag) zigZagFlag = significantRow = y - 1;
                 else if (zigZagFlag && significantRow == 0) zigZagFlag = 0;
             }
-
-            //printf("(x,y) = (%d,%d) = '%c'\n", x, y, matrix[x][y]);
-            //printf("significantRow = %d\n", significantRow);
-            //printf("zzf = %s\n", zigZagFlag ? "true" : "false");
         }
 
-    // read matrix
+    /* read matrix */
     char *res = calloc(CONSTRAINT + 1, sizeof *res);
-    index = 0; // for writing characters to resultant
+    index = 0; // for writing characters to resultant string
     for (int y = 0; y < numRows; ++y)
-        for (int x = 0; x < numCols; ++x) {
-            if (matrix[x][y] != EOF) {
-                *(res + index) = matrix[x][y];
-                ++index;
-            } else continue;
-
-            if (matrix[x][y] == 0) break;
-        }
+        for (int x = 0; x < numCols; ++x)
+            if (matrix[x][y] != EOF) res[index++] = matrix[x][y];
+            else continue;
 
     return res;
 }
