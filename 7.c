@@ -1,4 +1,3 @@
-#include <stdint.h>
 #include <stdio.h>
 
 #define MAX_DIGITS 10
@@ -54,10 +53,6 @@ main(void)
     printf("123 -> %d\n", reverse(123));
     printf("-123 -> %d\n", reverse(-123));
     printf("120 -> %d\n", reverse(120));
-    printf("min: %d -> %d\n", INT32_MIN, reverse(INT32_MIN));
-    printf("%d -> %d\n", INT32_MIN + 1, reverse(INT32_MIN + 1));
-    printf("max: %d -> %d\n", INT32_MAX, reverse(INT32_MAX));
-    printf("%d -> %d\n", INT32_MAX - 1, reverse(INT32_MAX - 1));
     printf("-2147483412 -> %d\n", reverse(-2147483412));
 
     return 0;
