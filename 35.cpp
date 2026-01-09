@@ -2,7 +2,8 @@
 #include <print>
 #include <vector>
 
-class Solution {
+class Solution
+{
 public:
     int searchInsert(std::vector<int>& nums, int target)
     {
